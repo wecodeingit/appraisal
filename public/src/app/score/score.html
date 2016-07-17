@@ -1,0 +1,44 @@
+<div class="md-padding" ng-controller="ScoreCtrl
+ as vm">
+    <md-toolbar class="site-content-toolbar">
+        <h2 class="md-toolbar-item md-breadcrumb md-headline">
+      <span class="md-padding">{{vm.title}}</span>
+    </h2>
+    </md-toolbar>
+    <md-divider></md-divider>
+    <md-content class="md-padding top-spacing-md">
+        <md-autocomplete md-selected-item="vm.selectedItem" md-search-text="vm.searchText" md-selected-item-change="vm.selectedItemChange(item)" md-items="item in vm.querySearch(vm.searchText)" md-item-text="item.name" md-min-length="0" placeholder="Select an employee to enter score" md-menu-class="autocomplete-template">
+            <md-item-template>
+                <span class="item-title">
+            <span> <strong>{{item.name}}</strong> </span>
+                </span>
+                <span class="item-metadata">
+            <span class="item-metastat">
+              <span>Employee ID <strong>{{item.id}}</strong> </span>
+                </span>
+                <span>from</span>
+                <span class="item-metastat">
+              <span><strong>{{item.dept}}</strong> Department</span>
+                </span>
+                </span>
+            </md-item-template>
+            <md-not-found>
+                No employee matching "{{vm.searchText}}" were found.
+            </md-not-found>
+        </md-autocomplete>
+        <div ng-if="vm.enterScore">
+            <div class="sectionInputForm top-spacing">
+                <md-input-container ng-repeat="measure in vm.measureData" class="md-block" flex-gt-sm>
+                    <label>{{measure.measureName}}</label>
+                    <input required name="name" ng-model="vm.scoreData[$index]" />
+                    <div class="md-errors-spacer left">
+                        <div class="md-char-counter">Weightage : {{measure.weightage}}</div>
+                    </div>
+                </md-input-container>
+            </div>
+            <md-button class="md-raised md-primary top-spacing-md" ng-click="vm.calculateScore()">
+                Calculate
+            </md-button>
+        </div>
+    </md-content>
+</div>

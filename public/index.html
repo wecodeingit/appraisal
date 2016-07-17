@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html ng-app="appraisal">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <base href="/">
+    <title>Appraisal Application</title>
+    <meta name="description" content="Appraisal Web Application" />
+    <meta name="author" content="" />
+    <meta name="keywords" content="" />
+    <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=yes" />
+    <!-- build:vendor-css -->
+    <link rel="stylesheet" href="/src/bower_components/angular-material/angular-material.css">
+    <!-- endbuild -->
+    <!-- build:app-css -->
+    <link rel="stylesheet" href="/src/assets/css/style.css">
+    <!-- endbuild -->
+</head>
+
+<body>
+    <div ui-view id="application-content" layout-fill></div>
+    <!-- build:vendor-js -->
+    <script src="src/bower_components/angular/angular.js"></script>
+    <script src="src/bower_components/angular-aria/angular-aria.js"></script>
+    <script src="src/bower_components/angular-animate/angular-animate.js"></script>
+    <script src="src/bower_components/angular-material/angular-material.js"></script>
+    <script src="src/bower_components/angular-ui-router/release/angular-ui-router.js"></script>
+    <!-- endbuild -->
+    <!-- build:template-js -->
+    <!-- endbuild -->
+    <!-- build:app-js -->
+    <script src="src/app/app.js"></script>
+    <script src="src/app/app.config.js"></script>
+    <script src="src/app/app.route.js"></script>
+    <script src="src/app/home/homeCtrl.js"></script>
+    <script src="src/app/configuration/configurationCtrl.js"></script>
+    <script src="src/app/score/scoreCtrl.js"></script>
+    <script src="src/app/score/overallScoreCtrl.js"></script>
+    <script src="src/app/summary/summaryCtrl.js"></script>
+    <!-- endbuild -->
+</body>
+
+</html>

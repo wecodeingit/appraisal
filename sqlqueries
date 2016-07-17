@@ -1,0 +1,93 @@
+#create user
+CREATE USER testuser IDENTIFIED BY '';
+GRANT ALL PRIVILEGES ON *.* TO testuser WITH GRANT OPTION;
+
+#create database
+create database appraisal_score;
+
+#create section table
+CREATE TABLE appraisal_score.criteria (
+id INT(6) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+measureName VARCHAR(30) NOT NULL,
+weightage FLOAT(5,2) NOT NULL
+);
+
+#insert into section table
+INSERT INTO appraisal_score.criteria(measureName,weightage) VALUES('Goal Score',20);
+INSERT INTO appraisal_score.criteria(measureName,weightage) VALUES('Attendance Score',20);
+INSERT INTO appraisal_score.criteria(measureName,weightage) VALUES('Competency Score',20);
+INSERT INTO appraisal_score.criteria(measureName,weightage) VALUES('Skill Rating Score',20);
+INSERT INTO appraisal_score.criteria(measureName,weightage) VALUES('Performance Objective Score',20);
+
+#create employee table
+create table appraisal_score.employee (
+id INT AUTO_INCREMENT PRIMARY KEY,
+name varchar(20),
+dept varchar(20)
+);
+
+#insert into employee table
+INSERT INTO appraisal_score.employee(name,dept) VALUES('Thomas','Sales');
+INSERT INTO appraisal_score.employee(name,dept) VALUES('Jason','Technology');
+INSERT INTO appraisal_score.employee(name,dept) VALUES('Mayla','Technology');
+INSERT INTO appraisal_score.employee(name,dept) VALUES('Nisha','Marketing');
+INSERT INTO appraisal_score.employee(name,dept) VALUES('Randy','Technology');
+
+#create section score table
+CREATE TABLE appraisal_score.section_score (
+employeeID INT,
+sectionID INT(6) UNSIGNED,
+sectionScore FLOAT(5,2) NOT NULL DEFAULT 0,
+FOREIGN KEY (employeeID) REFERENCES appraisal_score.employee(id),
+FOREIGN KEY (sectionID) REFERENCES appraisal_score.criteria(id),
+PRIMARY KEY (employeeID, sectionID)
+);
+
+#create overall score table
+CREATE TABLE appraisal_score.overall_score (
+employeeID INT PRIMARY KEY,
+overallScore FLOAT(5,2) NOT NULL DEFAULT 0,
+FOREIGN KEY (employeeID) REFERENCES appraisal_score.employee(id)
+);
+
+
+SELECT s.employeeID, e.name, c.id, c.measureName, s.sectionScore
+FROM appraisal_score.section_score AS s
+INNER JOIN appraisal_score.employee AS e on s.employeeID = e.id
+INNER JOIN appraisal_score.criteria AS c on s.sectionID = c.id
+WHERE s.employeeID=1
+AND s.sectionID=1;
+
+SELECT s.employeeID, e.name, c.id, c.measureName, s.sectionScore
+FROM appraisal_score.section_score AS s
+INNER JOIN appraisal_score.employee as e on s.employeeID = e.id
+INNER JOIN appraisal_score.criteria AS c on s.sectionID = c.id
+WHERE s.employeeID=1
+AND s.sectionID=1;
+
+SELECT o.employeeID, e.name, o.overallScore
+FROM appraisal_score.overall_score AS o
+INNER JOIN appraisal_score.employee as e on o.employeeID = e.id;
+
+SELECT o.employeeID, e.name, o.overallScore
+FROM appraisal_score.overall_score AS o
+INNER JOIN appraisal_score.employee as e on o.employeeID = e.id
+WHERE o.employeeID=1;
+
+
+
+#truncate queries for tables
+
+#truncate table appraisal_score.criteria;
+#truncate table appraisal_score.employee;
+#truncate table appraisal_score.section_score;
+#truncate table appraisal_score.overall_score;
+
+
+#select queries for tables
+
+#select * from appraisal_score.criteria;
+#select * from appraisal_score.employee;
+#select * from appraisal_score.section_score;
+#select * from appraisal_score.overall_score;
+

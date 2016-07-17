@@ -1,0 +1,38 @@
+<div layout="row" layout-fill ng-controller="HomeCtrl as vm">
+    <md-sidenav layout="column" class="md-sidenav-left md-whiteframe-z2" md-component-id="left" md-is-locked-open="$mdMedia('gt-md')">
+        <div>
+            <md-toolbar class="md-tall md-hue-2 header-logo-bar">
+                <div layout="column" class="md-toolbar-tools-bottom inset">
+                    <div layout="row" layout-align="center">
+                        <span class="header-logo"></span>
+                    </div>
+                </div>
+            </md-toolbar>
+            <md-list class="navTab">
+                <md-list-item ui-sref="home.configuration" ng-class="{'active':vm.isSelected('home.configuration')}">
+                    <p> Configuration</p>
+                </md-list-item>
+                <md-list-item ui-sref="home.score" ng-class="{'active':vm.isSelected('home.score')}">
+                    <p> Score</p>
+                </md-list-item>
+                <md-list-item ui-sref="home.summary" ng-class="{'active':vm.isSelected('home.summary')}">
+                    <p> Summary</p>
+                </md-list-item>
+            </md-list>
+        </div>
+    </md-sidenav>
+    <div layout="column" class="relative" layout-fill role="main">
+        <md-toolbar>
+            <div class="md-toolbar-tools">
+                <md-button ng-click="vm.toggleSidenav('left')" hide-gt-md aria-label="Menu">
+                    <ng-md-icon icon="menu"></ng-md-icon>
+                </md-button>
+                <h3>Appraisal Application</h3>
+                <span flex></span>
+            </div>
+        </md-toolbar>
+        <md-content layout="column" flex md-scroll-y>
+            <div ui-view></div>
+        </md-content>
+    </div>
+</div>
