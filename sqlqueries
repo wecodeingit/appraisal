@@ -91,3 +91,6 @@ WHERE o.employeeID=1;
 #select * from appraisal_score.section_score;
 #select * from appraisal_score.overall_score;
 
+
+#INSERT INTO appraisal_score.section_score(employeeID,sectionID,sectionScore) VALUES(1,1,20);
+#UPDATE appraisal_score.section_score SET sectionScore = 10 WHERE sectionID = 1 AND employeeID = 1;
