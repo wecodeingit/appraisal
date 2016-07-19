@@ -197,3 +197,11 @@
     text-overflow: ellipsis;
     display: block;
 }
+
+.close-view {
+    font-size: 20px;
+    cursor: pointer;
+    outline: none;
+    color: #3f51b5;
+    font-weight: bold;
+}

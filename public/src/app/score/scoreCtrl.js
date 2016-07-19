@@ -74,12 +74,10 @@
                     data: { 'scores': scoreJson },
                     url: '/saveIndividualScore',
                 }).then(function successCallback(response) {
-                    console.log(response);
+                    vm.openBottomSheet(overallScoreVal);
                 }, function errorCallback(response) {
                     console.log("error in save config");
                 });
-
-                vm.openBottomSheet(overallScoreVal);
             }
         };
         vm.openBottomSheet = function(overallScore) {
