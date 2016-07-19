@@ -7,6 +7,7 @@ var livereload = require('gulp-livereload');
 var htmlreplace = require('gulp-html-replace');
 var runSequence = require('run-sequence');
 var concat = require('gulp-concat');
+var sourcemaps = require('gulp-sourcemaps');
 var rename = require('gulp-rename');
 var ngTemplates = require('gulp-ng-templates');
 var ngAnnotate = require('gulp-ng-annotate');
@@ -53,14 +54,17 @@ gulp.task('build-html', function() {
 
 gulp.task('build-vendor-js', function() {
     var libraryJSFilesList = [
-        lib + 'angular/angular.min.js',
-        lib + 'angular-aria/angular-aria.min.js',
-        lib + 'angular-animate/angular-animate.min.js',
-        lib + 'angular-material/angular-material.min.js',
-        lib + 'angular-ui-router/release/angular-ui-router.min.js'
+        lib + 'angular/angular.js',
+        lib + 'angular-aria/angular-aria.js',
+        lib + 'angular-animate/angular-animate.js',
+        lib + 'angular-material/angular-material.js',
+        lib + 'angular-ui-router/release/angular-ui-router.js'
     ];
     gulp.src(libraryJSFilesList)
-        .pipe(concat('vendor.min.js'))
+        .pipe(concat('vendor.js'))
+        .pipe(gulp.dest(dist + "js/"))
+        .pipe(rename('vendor.min.js'))
+        .pipe(uglify())
         .pipe(gulp.dest(dist + "js/"));
 
 });
@@ -76,11 +80,13 @@ gulp.task('build-app-js', function() {
 
     ];
     gulp.src(appJSFilesList)
+        .pipe(sourcemaps.init())
         .pipe(concat('app.js'))
         .pipe(ngAnnotate())
         .pipe(gulp.dest(dist + "js/"))
         .pipe(rename('app.min.js'))
         .pipe(uglify())
+        .pipe(sourcemaps.write())
         .pipe(gulp.dest(dist + "js/"));
 
 
