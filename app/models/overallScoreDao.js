@@ -26,12 +26,12 @@ var overallScoreDao = {
                 return conn.query(getOverallScoreForAllEmployeesQuery)
                     .then(function(rows) {
                         db.terminateDatabaseConnection(conn);
-                        callback(rows);
+                        callback({ type: 'SUCCESS', result: rows });
                     });
             })
             .catch(function(error) {
                 console.log(error);
-                callback(error);
+                callback({ type: 'ERROR', result: error });
             });
     },
     getOverallScoreByEmployeeId: function(employeeId, callback) {
@@ -41,12 +41,12 @@ var overallScoreDao = {
                 return conn.query(getOverallScoreByEmployeeIdQuery, [employeeId])
                     .then(function(rows) {
                         db.terminateDatabaseConnection(conn);
-                        callback(rows);
+                        callback({ type: 'SUCCESS', result: rows });
                     });
             })
             .catch(function(error) {
                 console.log(error);
-                callback(error);
+                callback({ type: 'ERROR', result: error });
             });
 
     }

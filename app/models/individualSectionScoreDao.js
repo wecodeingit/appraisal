@@ -43,7 +43,7 @@ var individualSectionScoreDao = {
                         updateRecords(conn, ++index);
                     }).catch(function(error) {
                         console.log(error);
-                        callback(error);
+                        callback({ type: 'ERROR', result: error });
                     });
 
             } else {
@@ -54,7 +54,7 @@ var individualSectionScoreDao = {
                         return response.affectedRows ? "Updated Successfully" : "Error while Updating";
                     }).catch(function(error) {
                         console.log(error);
-                        callback(error);
+                        callback({ type: 'ERROR', result: error });
                     });
             }
         }
@@ -74,7 +74,7 @@ var individualSectionScoreDao = {
                 })
                 .catch(function(error) {
                     console.log(error);
-                    callback(error);
+                    callback({ type: 'ERROR', result: error });
                 });
         }
 
@@ -84,9 +84,9 @@ var individualSectionScoreDao = {
                     .then(function(rows) {
 
                         if (rows.length) {
-                            callback(updateRecords(conn, RECORD_ZERO));
+                            callback({ type: 'SUCCESS', result: updateRecords(conn, RECORD_ZERO) });
                         } else {
-                            callback(addRecords(conn));
+                            callback({ type: 'SUCCESS', result: addRecords(conn) });
                         }
 
                     });
@@ -100,12 +100,12 @@ var individualSectionScoreDao = {
                 return conn.query(getAllIndividualScoreForAllEmployeesQuery)
                     .then(function(rows) {
                         db.terminateDatabaseConnection(conn);
-                        callback(db.groupByRecord(rows, 'employeeID', 'scores'));
+                        callback({ type: 'SUCCESS', result: db.groupByRecord(rows, 'employeeID', 'scores') });
                     });
             })
             .catch(function(error) {
                 console.log(error);
-                callback(error);
+                callback({ type: 'ERROR', result: error });
             });
     },
     getAllIndividualScoreByEmployeeId: function(employeeId, callback) {
@@ -115,12 +115,12 @@ var individualSectionScoreDao = {
                 return conn.query(getAllIndividualScoreByEmployeeIdQuery, [employeeId])
                     .then(function(rows) {
                         db.terminateDatabaseConnection(conn);
-                        callback(db.groupByRecord(rows, 'employeeID', 'scores'));
+                        callback({ type: 'SUCCESS', result: db.groupByRecord(rows, 'employeeID', 'scores') });
                     });
             })
             .catch(function(error) {
                 console.log(error);
-                callback(error);
+                callback({ type: 'ERROR', result: error });
             });
     },
     getIndividualScoreByIdForEmployeeId: function(employeeId, sectionId, callback) {
@@ -130,12 +130,12 @@ var individualSectionScoreDao = {
                 return conn.query(getIndividualScoreByIdForEmployeeId, [employeeId, sectionId])
                     .then(function(rows) {
                         db.terminateDatabaseConnection(conn);
-                        callback(db.groupByRecord(rows, 'employeeID', 'scores'));
+                        callback({ type: 'SUCCESS', result: db.groupByRecord(rows, 'employeeID', 'scores') });
                     });
             })
             .catch(function(error) {
                 console.log(error);
-                callback(error);
+                callback({ type: 'ERROR', result: error });
             });
     }
 };
