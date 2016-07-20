@@ -13,6 +13,7 @@
     <md-content class="md-tabs md-padding">
         <div ng-class="vm.isDrilldownView?'md-left':'md-active'" class="md-tab-content dynamic-height">
             <div ng-class="{'md-left':vm.isDrilldownView}" ng-if="!vm.isDrilldownView">
+                <span ng-if="!vm.employeeList.length">No employee records found</span>
                 <md-list>
                     <md-list-item ng-click="vm.nextView(employee)" ng-repeat="employee in vm.employeeList" class="md-3-line">
                         <span class="md-avatar employee-avatar" /></span>
