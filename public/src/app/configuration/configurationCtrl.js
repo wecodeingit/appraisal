@@ -55,10 +55,10 @@
                     },
                     url: '/saveSectionConfiguration'
                 }).then(function successCallback(response) {
+                    console.log("configuration saved successfully");
                     $mdToast.show($mdToast.simple()
                         .textContent('Saved successfully')
                         .position("top right"));
-                    console.log("configuration saved successfully");
                 }, function errorCallback(response) {
                     console.log("error in save config");
                 });
