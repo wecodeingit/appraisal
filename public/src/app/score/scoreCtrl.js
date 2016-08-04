@@ -25,6 +25,7 @@
                     url: '/getSectionConfiguration'
                 }).then(function successCallback(response) {
                     vm.measureData = response.data.section;
+					console.log("check git");
                 }, function errorCallback(response) {
                     console.log("error in save config");
                 });
